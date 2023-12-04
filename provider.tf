@@ -1,4 +1,12 @@
 terraform {
+  backend "s3" {
+    bucket = "idristerraformstate1"
+    key    = "statefile"
+    region = "us-west-2"
+  }
+}
+
+terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
@@ -8,6 +16,6 @@ terraform {
 }
 provider "aws" {
   region     = "us-west-2"
-  shared_credentials_files = ["~/.aws/credentiatls"]
+  shared_credentials_files = ["~/.aws/credentials"]
   profile                  = "default"
 }
