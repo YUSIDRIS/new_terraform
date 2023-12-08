@@ -109,4 +109,15 @@ resource "aws_route_table_association" "Nat-Gateway-RT-Association" {
   subnet_id      = aws_subnet.private_subnet[count.index].id
   route_table_id = aws_route_table.NAT-Gateway-RT[count.index].id
 }
+resource "aws_subnet" "DB_subnet" {
+  count      = length(var.DB_subnet_cidr) 
+  vpc_id     = aws_vpc.deveploment_vpc.id
+  cidr_block = var.DB_subnet_cidr[count.index]
+  availability_zone = data.aws_availability_zones.AZ.names[count.index]
+  map_public_ip_on_launch = false
+
+  tags = {
+    Name = "DB-${count.index+1}-SUBNET"
+  }
+}
 
