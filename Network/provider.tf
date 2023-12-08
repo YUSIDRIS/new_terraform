@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "idristerraformstate1"
-    key    = "statefile"
+    key    = "Network.statefile"
     region = "us-west-2"
   }
 }
